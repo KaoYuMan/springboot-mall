@@ -21,12 +21,19 @@ public class ProduceController {
     @GetMapping("/products")
                                                    //@RequestParam(required = false)此設定就算不帶category參數數值依然可以運行
     public  ResponseEntity<List<Product>>getProducts(
+            //查詢條件 Filtering
             @RequestParam(required = false) ProductCategory category,
-            @RequestParam(required = false) String serch
+            @RequestParam(required = false) String serch,
+
+            //排序 Sorting
+            @RequestParam(defaultValue = "created_date") String orderBy,
+            @RequestParam(defaultValue = "desc" ) String sort
     ){
         ProductQueryParams productQueryParams = new ProductQueryParams();
         productQueryParams.setCategory(category);
         productQueryParams.setSerch(serch);
+        productQueryParams.setOrderBy(orderBy);
+        productQueryParams.setSort(sort);
 
         List<Product> productList = productService.getProducts(productQueryParams);
 
