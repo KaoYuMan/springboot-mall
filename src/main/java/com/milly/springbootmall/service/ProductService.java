@@ -1,6 +1,7 @@
 package com.milly.springbootmall.service;
 
 import com.milly.springbootmall.constant.ProductCategory;
+import com.milly.springbootmall.dao.ProductQueryParams;
 import com.milly.springbootmall.dto.ProductRequest;
 import com.milly.springbootmall.model.Product;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getProducts(ProductCategory category,String serch);
+    List<Product> getProducts(ProductQueryParams productQueryParams);
     Product getProductById(Integer productId);
 
     Integer creatProduct(ProductRequest productRequest);
