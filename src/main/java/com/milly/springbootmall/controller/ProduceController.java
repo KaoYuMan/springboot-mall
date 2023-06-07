@@ -1,5 +1,6 @@
 package com.milly.springbootmall.controller;
 
+import com.milly.springbootmall.constant.ProductCategory;
 import com.milly.springbootmall.dto.ProductRequest;
 import com.milly.springbootmall.model.Product;
 import com.milly.springbootmall.service.ProductService;
@@ -17,9 +18,12 @@ public class ProduceController {
     private ProductService productService;
 
     @GetMapping("/products")
-    public  ResponseEntity<List<Product>>getProducts(){
+                                                   //@RequestParam(required = false)此設定就算不帶category參數數值依然可以運行
+    public  ResponseEntity<List<Product>>getProducts(@RequestParam(required = false) ProductCategory category,
+                                                     @RequestParam(required = false) String serch
+    ){
 
-        List<Product> productList = productService.getProducts();
+        List<Product> productList = productService.getProducts(category,serch);
 
         return ResponseEntity.status(HttpStatus.OK).body(productList) ;
     }

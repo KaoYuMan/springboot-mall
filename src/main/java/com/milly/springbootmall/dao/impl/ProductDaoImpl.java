@@ -1,5 +1,6 @@
 package com.milly.springbootmall.dao.impl;
 
+import com.milly.springbootmall.constant.ProductCategory;
 import com.milly.springbootmall.dao.ProductDao;
 import com.milly.springbootmall.dto.ProductRequest;
 import com.milly.springbootmall.model.Product;
@@ -22,11 +23,25 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Product> getProducts() {
+    public List<Product> getProducts(ProductCategory category,String serch) {
         String sql = "SELECT  product_id,product_name, category, image_url, price, stock, " +
                 "description, created_date, last_modified_date " +
-                "FROM product";
+                "FROM product WHERE 1 = 1";
+                //加上WHERE 1 = 1，雖無意義但主要是為了拼接條件，ex:" AND category = :category"
+
         Map<String,Object> map = new HashMap<>();
+
+        if(category != null){
+                       // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
+            sql = sql + " AND category = :category";
+            map.put("category",category.name());
+        }
+        if(serch != null){
+                       // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
+            sql = sql + " AND product_name LIKE :serch";
+            //模糊查詢 % 要使用map來加入，不能直接加入在sql語句中
+            map.put("serch","%" + serch + "%");
+        }
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql,map,new ProductRowMapper());
 
