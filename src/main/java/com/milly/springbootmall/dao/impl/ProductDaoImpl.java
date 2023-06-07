@@ -54,6 +54,7 @@ public class ProductDaoImpl implements ProductDao {
         map.put("description",productRequest.getDescription());
 
         Date now = new Date();
+
         map.put("createdDate",now);
         map.put("lastModifiedDate",now);
         //取得DB自動生成的Id
@@ -64,5 +65,31 @@ public class ProductDaoImpl implements ProductDao {
         int productId = keyHolder.getKey().intValue();
 
         return productId;
+    }
+
+    @Override
+    public void updateProduct(Integer productId, ProductRequest productRequest) {
+        String sql = "UPDATE product SET product_name = :productName, category = :category, " +
+                "image_url = :imageURL, price = :price, stock = :stock, description = :description, " +
+                "last_modified_date = :lastModifiedDate WHERE product_id = :productId";
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("productId",productId);
+
+        map.put("productName",productRequest.getProductName());
+        map.put("category",productRequest.getCategory().toString());
+        map.put("imageURL",productRequest.getImageURL());
+        map.put("price",productRequest.getPrice());
+        map.put("stock",productRequest.getStock());
+        map.put("description",productRequest.getDescription());
+
+        map.put("lastModifiedDate",new Date());
+
+        namedParameterJdbcTemplate.update(sql,map);
+
+
+
+
+
     }
 }
