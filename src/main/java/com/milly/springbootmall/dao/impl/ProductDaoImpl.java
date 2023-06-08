@@ -31,7 +31,7 @@ public class ProductDaoImpl implements ProductDao {
                 //加上WHERE 1 = 1，雖無意義但主要是為了拼接條件，ex:" AND category = :category"
 
         Map<String,Object> map = new HashMap<>();
-
+        //查詢條件
         if(productQueryParams.getCategory() != null){
                        // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
             sql = sql + " AND category = :category";
@@ -43,9 +43,13 @@ public class ProductDaoImpl implements ProductDao {
             //模糊查詢 % 要使用map來加入，不能直接加入在sql語句中
             map.put("serch","%" + productQueryParams.getSerch() + "%");
         }
+        //排序
                    // ORDER BY 的前面後面一定要加上一格空白鍵，才不會與sql語句重疊
         sql = sql + " ORDER BY " + productQueryParams.getOrderBy() + " "+ productQueryParams.getSort();
-
+        //分頁
+        sql = sql + " LIMIT :limit OFFSET :offset";
+        map.put("limit", productQueryParams.getLimit());
+        map.put("offset",productQueryParams.getOffset());
         List<Product> productList = namedParameterJdbcTemplate.query(sql,map,new ProductRowMapper());
 
         return productList;
