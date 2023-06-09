@@ -3,7 +3,6 @@ package com.milly.springbootmall.dto;
 import com.milly.springbootmall.constant.ProductCategory;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 public class ProductRequest {
     @NotNull
@@ -11,7 +10,7 @@ public class ProductRequest {
     @NotNull
     private ProductCategory category;
     @NotNull
-    private String imageURL;
+    private String imageUrl;
     @NotNull
     private Integer price;
     @NotNull
@@ -35,12 +34,12 @@ public class ProductRequest {
         this.category = category;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Integer getPrice() {

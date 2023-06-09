@@ -1,12 +1,11 @@
 package com.milly.springbootmall.dao;
 
 import com.milly.springbootmall.constant.ProductCategory;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public class ProductQueryParams {
     private ProductCategory category;
 
-    private String serch;
+    private String search;
 
     private String orderBy;
 
@@ -24,12 +23,12 @@ public class ProductQueryParams {
         this.category = category;
     }
 
-    public String getSerch() {
-        return serch;
+    public String getSearch() {
+        return search;
     }
 
-    public void setSerch(String serch) {
-        this.serch = serch;
+    public void setSearch(String search) {
+        this.search = search;
     }
 
     public String getOrderBy() {

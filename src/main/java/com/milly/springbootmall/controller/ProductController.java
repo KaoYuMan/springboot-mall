@@ -19,7 +19,7 @@ import java.util.List;
 
 @Validated
 @RestController
-public class ProduceController {
+public class ProductController {
     @Autowired
     private ProductService productService;
 
@@ -30,7 +30,7 @@ public class ProduceController {
             //查詢條件 Filtering
             //@RequestParam(required = false)此設定就算不帶category參數數值依然可以運行
             @RequestParam(required = false) ProductCategory category,
-            @RequestParam(required = false) String serch,
+            @RequestParam(required = false) String search,
 
             //排序 Sorting
             @RequestParam(defaultValue = "created_date") String orderBy,
@@ -42,7 +42,7 @@ public class ProduceController {
     ){
         ProductQueryParams productQueryParams = new ProductQueryParams();
         productQueryParams.setCategory(category);
-        productQueryParams.setSerch(serch);
+        productQueryParams.setSearch(search);
         productQueryParams.setOrderBy(orderBy);
         productQueryParams.setSort(sort);
         productQueryParams.setLimit(limit);
@@ -89,7 +89,7 @@ public class ProduceController {
         //檢查 product 是否存在
         Product product = productService.getProductById(productId);
         if (product == null) {
-            ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         //修改商品的數據
         productService.updateProduct(productId, productRequest);

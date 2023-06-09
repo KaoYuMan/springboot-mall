@@ -8,7 +8,7 @@ public class Product {
     private Integer productId;
     private String productName;
     private ProductCategory category;
-    private String imageURL;
+    private String imageUrl;
     private Integer price;
     private Integer stock;
     private String description;
@@ -39,12 +39,12 @@ public class Product {
         this.category = category;
     }
 
-    public String getImageURL() {
-        return imageURL;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Integer getPrice() {

@@ -1,6 +1,5 @@
 package com.milly.springbootmall.dao.impl;
 
-import com.milly.springbootmall.constant.ProductCategory;
 import com.milly.springbootmall.dao.ProductDao;
 import com.milly.springbootmall.dao.ProductQueryParams;
 import com.milly.springbootmall.dto.ProductRequest;
@@ -78,13 +77,13 @@ public class ProductDaoImpl implements ProductDao {
     public Integer creatProduct(ProductRequest productRequest) {
         String sql = "INSERT INTO product (product_name, category, image_url, " +
                 "price, stock, description, created_date, last_modified_date) " +
-                "VALUES (:productName, :category, :imageURL , :price, " +
+                "VALUES (:productName, :category, :imageUrl , :price, " +
                 ":stock , :description, :createdDate,:lastModifiedDate)";
 
         Map<String, Object> map = new HashMap<>();
         map.put("productName", productRequest.getProductName());
         map.put("category", productRequest.getCategory().toString());
-        map.put("imageURL", productRequest.getImageURL());
+        map.put("imageUrl", productRequest.getImageUrl());
         map.put("price", productRequest.getPrice());
         map.put("stock", productRequest.getStock());
         map.put("description", productRequest.getDescription());
@@ -106,7 +105,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public void updateProduct(Integer productId, ProductRequest productRequest) {
         String sql = "UPDATE product SET product_name = :productName, category = :category, " +
-                "image_url = :imageURL, price = :price, stock = :stock, description = :description, " +
+                "image_url = :imageUrl, price = :price, stock = :stock, description = :description, " +
                 "last_modified_date = :lastModifiedDate WHERE product_id = :productId";
 
         Map<String, Object> map = new HashMap<>();
@@ -114,7 +113,7 @@ public class ProductDaoImpl implements ProductDao {
 
         map.put("productName", productRequest.getProductName());
         map.put("category", productRequest.getCategory().toString());
-        map.put("imageURL", productRequest.getImageURL());
+        map.put("imageUrl", productRequest.getImageUrl());
         map.put("price", productRequest.getPrice());
         map.put("stock", productRequest.getStock());
         map.put("description", productRequest.getDescription());
@@ -142,11 +141,11 @@ public class ProductDaoImpl implements ProductDao {
             sql = sql + " AND category = :category";
             map.put("category", productQueryParams.getCategory().name());
         }
-        if (productQueryParams.getSerch() != null) {
+        if (productQueryParams.getSearch() != null) {
             // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
-            sql = sql + " AND product_name LIKE :serch";
+            sql = sql + " AND product_name LIKE :search";
             //模糊查詢 % 要使用map來加入，不能直接加入在sql語句中
-            map.put("serch", "%" + productQueryParams.getSerch() + "%");
+            map.put("search", "%" + productQueryParams.getSearch() + "%");
         }
         return sql;
     }
