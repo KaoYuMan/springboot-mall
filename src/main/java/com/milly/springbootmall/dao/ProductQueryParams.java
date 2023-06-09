@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public class ProductQueryParams {
     private ProductCategory category;
+
     private String serch;
 
     private String orderBy;
@@ -12,6 +13,7 @@ public class ProductQueryParams {
     private String sort;
 
     private Integer limit;
+
     private Integer offset;
 
     public ProductCategory getCategory() {

@@ -5,7 +5,7 @@ import com.milly.springbootmall.dao.ProductQueryParams;
 import com.milly.springbootmall.dto.ProductRequest;
 import com.milly.springbootmall.model.Product;
 import com.milly.springbootmall.service.ProductService;
-import com.milly.springbootmall.util.Page;
+import com.milly.springbootmall.service.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +24,11 @@ public class ProduceController {
     private ProductService productService;
 
     @GetMapping("/products")
-                                                   //@RequestParam(required = false)此設定就算不帶category參數數值依然可以運行
+
     public  ResponseEntity<Page<Product>>getProducts(
+
             //查詢條件 Filtering
+            //@RequestParam(required = false)此設定就算不帶category參數數值依然可以運行
             @RequestParam(required = false) ProductCategory category,
             @RequestParam(required = false) String serch,
 

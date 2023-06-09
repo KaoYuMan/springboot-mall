@@ -28,18 +28,10 @@ public class ProductDaoImpl implements ProductDao {
         String sql = "SELECT count(*) FROM product WHERE 1=1";
         Map<String, Object> map = new HashMap<>();
         //查詢條件
-        if (productQueryParams.getCategory() != null) {
-            // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
-            sql = sql + " AND category = :category";
-            map.put("category", productQueryParams.getCategory().name());
-        }
-        if (productQueryParams.getSerch() != null) {
-            // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
-            sql = sql + " AND product_name LIKE :serch";
-            //模糊查詢 % 要使用map來加入，不能直接加入在sql語句中
-            map.put("serch", "%" + productQueryParams.getSerch() + "%");
-        }
+        sql = addFilteringSql(sql,map,productQueryParams);
+
         Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+
         return total;
     }
 
@@ -52,17 +44,7 @@ public class ProductDaoImpl implements ProductDao {
 
         Map<String, Object> map = new HashMap<>();
         //查詢條件
-        if (productQueryParams.getCategory() != null) {
-            // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
-            sql = sql + " AND category = :category";
-            map.put("category", productQueryParams.getCategory().name());
-        }
-        if (productQueryParams.getSerch() != null) {
-            // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
-            sql = sql + " AND product_name LIKE :serch";
-            //模糊查詢 % 要使用map來加入，不能直接加入在sql語句中
-            map.put("serch", "%" + productQueryParams.getSerch() + "%");
-        }
+        sql = addFilteringSql(sql,map,productQueryParams);
         //排序
         // ORDER BY 的前面後面一定要加上一格空白鍵，才不會與sql語句重疊
         sql = sql + " ORDER BY " + productQueryParams.getOrderBy() + " " + productQueryParams.getSort();
@@ -150,6 +132,23 @@ public class ProductDaoImpl implements ProductDao {
         map.put("productId", productId);
 
         namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    //提煉SQL查詢條件資料的方法
+    private String addFilteringSql(String sql,Map<String,Object>map,ProductQueryParams productQueryParams){
+        //查詢條件
+        if (productQueryParams.getCategory() != null) {
+            // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
+            sql = sql + " AND category = :category";
+            map.put("category", productQueryParams.getCategory().name());
+        }
+        if (productQueryParams.getSerch() != null) {
+            // AND 的前面一定要加上一格空白鍵，才不會與sql語句重疊
+            sql = sql + " AND product_name LIKE :serch";
+            //模糊查詢 % 要使用map來加入，不能直接加入在sql語句中
+            map.put("serch", "%" + productQueryParams.getSerch() + "%");
+        }
+        return sql;
     }
 
 }

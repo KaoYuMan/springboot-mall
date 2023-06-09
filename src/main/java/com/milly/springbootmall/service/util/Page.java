@@ -1,4 +1,4 @@
-package com.milly.springbootmall.util;
+package com.milly.springbootmall.service.util;
 
 import org.hibernate.validator.constraints.SafeHtml;
 
