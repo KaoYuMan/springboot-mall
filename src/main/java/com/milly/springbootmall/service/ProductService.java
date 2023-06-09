@@ -8,8 +8,10 @@ import com.milly.springbootmall.model.Product;
 import java.util.List;
 
 public interface ProductService {
+    Integer countProduct(ProductQueryParams productQueryParams);
 
     List<Product> getProducts(ProductQueryParams productQueryParams);
+
     Product getProductById(Integer productId);
 
     Integer creatProduct(ProductRequest productRequest);
@@ -17,4 +19,5 @@ public interface ProductService {
     void updateProduct(Integer productId,ProductRequest productRequest);
 
     void deleteProductById(Integer productId);
+
 }
