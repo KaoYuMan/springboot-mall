@@ -1,6 +1,6 @@
 package com.milly.springbootmall.service;
 
-import com.milly.springbootmall.dao.ProductQueryParams;
+import com.milly.springbootmall.dto.ProductQueryParams;
 import com.milly.springbootmall.dto.ProductRequest;
 import com.milly.springbootmall.model.Product;
 

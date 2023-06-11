@@ -1,4 +1,4 @@
-package com.milly.springbootmall.dao;
+package com.milly.springbootmall.dto;
 
 import com.milly.springbootmall.constant.ProductCategory;
 

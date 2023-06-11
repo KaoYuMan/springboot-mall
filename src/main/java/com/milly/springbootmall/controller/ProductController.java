@@ -1,7 +1,7 @@
 package com.milly.springbootmall.controller;
 
 import com.milly.springbootmall.constant.ProductCategory;
-import com.milly.springbootmall.dao.ProductQueryParams;
+import com.milly.springbootmall.dto.ProductQueryParams;
 import com.milly.springbootmall.dto.ProductRequest;
 import com.milly.springbootmall.model.Product;
 import com.milly.springbootmall.service.ProductService;

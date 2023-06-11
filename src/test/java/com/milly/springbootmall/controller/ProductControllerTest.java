@@ -52,6 +52,7 @@ public class ProductControllerTest {
                 .get("/products/{productId}", 20000);
 
         mockMvc.perform(requestBuilder)
+                .andDo(print())
                 .andExpect(status().is(404));
     }
 
