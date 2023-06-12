@@ -2,17 +2,16 @@ package com.milly.springbootmall.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
 public class User {
     private Integer userId;
-    @JsonProperty("E_mail")
+
     private String email;
     @JsonIgnore
     private String password;
-    private Date creatDate;
+    private Date createdDate;
     private Date lastModifiedDate;
 
     public Integer getUserId() {
@@ -39,12 +38,12 @@ public class User {
         this.password = password;
     }
 
-    public Date getCreatDate() {
-        return creatDate;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setCreatDate(Date creatDate) {
-        this.creatDate = creatDate;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public Date getLastModifiedDate() {
