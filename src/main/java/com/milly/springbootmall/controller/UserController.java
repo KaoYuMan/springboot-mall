@@ -1,5 +1,6 @@
 package com.milly.springbootmall.controller;
 
+import com.milly.springbootmall.dto.UserLoginRequest;
 import com.milly.springbootmall.dto.UserRegisterRequest;
 import com.milly.springbootmall.model.User;
 import com.milly.springbootmall.service.UserService;
@@ -24,5 +25,11 @@ public class UserController {
      User user = userService.getUserById(userId);
 
      return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    }
+
+    @PostMapping("/users/login")
+    public ResponseEntity<User> login(@RequestBody@Valid UserLoginRequest userLoginRequest){
+        User user = userService.login(userLoginRequest);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 }
