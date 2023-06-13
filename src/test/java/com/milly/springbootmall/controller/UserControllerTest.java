@@ -159,15 +159,7 @@ public class UserControllerTest {
         userLoginRequest.setEmail("hkbudsr324");
         userLoginRequest.setPassword("123");
 
-        String json = objectMapper.writeValueAsString(userLoginRequest);
-
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .post("/users/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json);
-
-        mockMvc.perform(requestBuilder)
-                .andExpect(status().is(400));
+        loginFail(userLoginRequest);
     }
 
     @Test
@@ -176,15 +168,7 @@ public class UserControllerTest {
         userLoginRequest.setEmail("unknown@gmail.com");
         userLoginRequest.setPassword("123");
 
-        String json = objectMapper.writeValueAsString(userLoginRequest);
-
-        RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .post("/users/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json);
-
-        mockMvc.perform(requestBuilder)
-                .andExpect(status().is(400));
+        loginFail(userLoginRequest);
     }
 
     private void register(UserRegisterRequest userRegisterRequest) throws Exception {
@@ -197,5 +181,17 @@ public class UserControllerTest {
 
         mockMvc.perform(requestBuilder)
                 .andExpect(status().is(201));
+    }
+
+    private  void  loginFail (UserLoginRequest userLoginRequest)throws Exception{
+        String json = objectMapper.writeValueAsString(userLoginRequest);
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post("/users/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mockMvc.perform(requestBuilder)
+                .andExpect(status().is(400));
     }
 }
