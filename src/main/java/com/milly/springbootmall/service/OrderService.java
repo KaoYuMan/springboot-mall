@@ -1,6 +1,7 @@
 package com.milly.springbootmall.service;
 
 import com.milly.springbootmall.dto.CreateOrderRequest;
+import com.milly.springbootmall.dto.EcpayParamms;
 import com.milly.springbootmall.dto.OrderQueryParams;
 import com.milly.springbootmall.model.Order;
 
@@ -11,5 +12,6 @@ public interface OrderService {
     Integer countOrder(OrderQueryParams orderQueryParams);
     Order getOrderById(Integer orderId);
     Integer createOrder (Integer userId, CreateOrderRequest createOrderRequest);
+    String ecpay(EcpayParamms ecpayParamms);
 
 }

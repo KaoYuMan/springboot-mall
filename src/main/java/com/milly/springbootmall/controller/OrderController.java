@@ -1,6 +1,7 @@
 package com.milly.springbootmall.controller;
 
 import com.milly.springbootmall.dto.CreateOrderRequest;
+import com.milly.springbootmall.dto.EcpayParamms;
 import com.milly.springbootmall.dto.OrderQueryParams;
 import com.milly.springbootmall.model.Order;
 import com.milly.springbootmall.service.OrderService;
@@ -22,6 +23,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    //取得訂單
     @GetMapping("/users/{userId}/orders")
     public ResponseEntity<Page<Order>> getOrders(
             @PathVariable Integer userId,
@@ -49,6 +51,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
+    //新增訂單
     @PostMapping("/users/{userId}/orders")
     public ResponseEntity<?> createOrder(@PathVariable Integer userId,
                                                @RequestBody @Valid CreateOrderRequest createOrderRequest){
@@ -58,5 +61,12 @@ public class OrderController {
         Order order = orderService.getOrderById(orderId);
 
        return ResponseEntity.status(HttpStatus.CREATED).body(order);
+    }
+    @PostMapping("/ecpay")
+    public ResponseEntity<String> ecpay(@RequestBody @Valid EcpayParamms ecpayParamms) {
+
+        String aioCheckOutALLForm = orderService.ecpay(ecpayParamms);
+
+        return ResponseEntity.status(HttpStatus.OK).body(aioCheckOutALLForm);
     }
 }
